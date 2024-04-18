@@ -11,7 +11,7 @@ export class AssignmentsService {
 
   constructor(private http:HttpClient) { }
 
-  uri = "http://192.168.74.104:3500/api/assignments";
+  uri = "http://localhost:3500/api/assignments";
 
   // retourne tous les assignments
   getAssignments():Observable<Assignment[]> {
