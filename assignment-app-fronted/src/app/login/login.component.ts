@@ -5,6 +5,8 @@ import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AuthService } from '../service/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -15,13 +17,26 @@ import { ReactiveFormsModule } from '@angular/forms';
 })
 export class LoginComponent {
   form: FormGroup = new FormGroup({
-    username: new FormControl(''),
-    password: new FormControl(''),
+    email: new FormControl('guillaume.haisoa@gmail.com'),
+    mdp: new FormControl('123456'),
   });
   error: string | null | undefined;
+
+  constructor(private authService: AuthService,private router: Router) {} // Injectez le service AuthService
+
+ 
   submit() {
-    if (this.form.valid) {
-      console.log(this.form.value);
-    }
+    const { email, mdp } = this.form.value;
+    this.authService.login(email, mdp).subscribe(
+      (response) => {
+        // Connexion réussie
+        this.router.navigateByUrl('/acceuil');
+      },
+      (error: string) => {
+        // Gestion de l'erreur de connexion
+        this.error = error;
+      }
+    );
+  
   }
 }

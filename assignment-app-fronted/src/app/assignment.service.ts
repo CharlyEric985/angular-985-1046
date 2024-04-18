@@ -1,15 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Assignment } from './shared/assignment/assignment.model';
+import { AuthService } from './service/auth.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AssignmentsService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient,  private authService: AuthService, private router: Router) { }
 
   uri = "http://localhost:3500/api/assignments";
 
@@ -19,7 +21,23 @@ export class AssignmentsService {
   }
 
   getAssignmentsPagines(page:number, limit:number):Observable<any> {
-    return this.http.get<Assignment[]>(this.uri + "?page=" + page + "&limit=" + limit);
+    //console.log("this.authService.getToken", this.authService.getToken())
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.authService.getToken()}` // Use the token from AuthService
+    });
+
+    return this.http.get<Assignment[]>(`${this.uri}?page=${page}&limit=${limit}`, { headers })
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          if (error.status === 403) {
+
+            this.authService.logout();
+            // Rediriger vers la page d'accueil en cas d'erreur 403 (token invalide ou expiré)
+          }
+          // Propager l'erreur au composant consommateur
+          throw error;
+        })
+      );
   }
 
   // renvoie un assignment par son id, renvoie undefined si pas trouvé

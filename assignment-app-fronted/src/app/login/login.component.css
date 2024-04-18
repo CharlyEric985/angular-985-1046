@@ -4,6 +4,15 @@
     margin: 100px 0px;
   }
 
+  .large-card {
+    width: 350px; /* Largeur personnalisée du card */
+  }
+
+  .large-input {
+    width: 300px; /* Largeur personnalisée des inputs par rapport à la largeur du card */
+    /* -32px pour compenser les marges par défaut des mat-form-field */
+  }
+
   .mat-form-field {
     width: 100%;
     min-width: 300px;
@@ -16,10 +25,10 @@
   }
 
   .error {
-    padding: 16px;
+    /*padding: 16px;*/
     width: 300px;
-    color: white;
-    background-color: red;
+    color: red;
+   /*background-color: red;*/
   }
 
   .button {
