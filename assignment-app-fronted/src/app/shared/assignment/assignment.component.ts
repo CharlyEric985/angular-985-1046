@@ -2,11 +2,14 @@ import { Component,Input } from '@angular/core';
 import { AssignmentsService } from '../../assignment.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Assignment } from './assignment.model';
+import {
+  CdkDrag
+} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-assignment',
   standalone: true,
-  imports: [],
+  imports: [CdkDrag],
   templateUrl: './assignment.component.html',
   styleUrl: './assignment.component.css'
 })
@@ -19,8 +22,8 @@ export class AssignmentComponent {
   .subscribe((assignment: any) => {
     this.data = assignment.data;
 
-    console.log(assignment)
-    console.log(this.data)
+    // console.log(assignment)
+    // console.log(this.data)
   });
   
   }

@@ -61,7 +61,14 @@ export class AssignmentsService {
     //return of("Assignment modifié avec succès");
     return this.http.put<Assignment>(this.uri, assignment);
   }
-
+  updateAssignments(assignment:any):Observable<any> {
+    // l'assignment passé en paramètre est le même objet que dans le tableau
+    // plus tard on verra comment faire avec une base de données
+    // il faudra faire une requête HTTP pour envoyer l'objet modifié
+     // this.logService.log(assignment.nom, "modifié");
+     //return of("Assignment modifié avec succès");
+     return this.http.put<Assignment>(this.uri, assignment);
+   }
   deleteAssignment(assignment:Assignment):Observable<any> {
     // on va supprimer l'assignment dans le tableau
     //let pos = this.assignments.indexOf(assignment);

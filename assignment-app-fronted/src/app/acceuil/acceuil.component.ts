@@ -11,12 +11,19 @@ import {MatTable, MatTableModule} from '@angular/material/table';
 import { MatPaginatorModule,PageEvent } from '@angular/material/paginator';
 import { MatListModule } from '@angular/material/list';
 import { MatSliderModule } from '@angular/material/slider';
+import {
+  CdkDragDrop,
+  moveItemInArray,
+  transferArrayItem,
+  CdkDrag,
+  CdkDropList,
+} from '@angular/cdk/drag-drop';
 
 
 @Component({
   selector: 'app-acceuil',
   standalone: true,
-  imports: [AssignmentComponent,CommonModule, FormsModule,
+  imports: [AssignmentComponent,CommonModule, FormsModule,CdkDropList, CdkDrag,
     RouterLink,
     MatButtonModule,
     MatTable, MatTableModule, MatPaginatorModule,
@@ -25,7 +32,9 @@ import { MatSliderModule } from '@angular/material/slider';
   styleUrl: './acceuil.component.css'
 })
 export class AcceuilComponent {
-  assignments!: any[];
+  assignments!: any;
+  assignments_done: any=[];
+  assignments_todo: any=[];
   titre:string="Liste des Assignements";
   page = 1;
   limit = 10;
@@ -41,6 +50,7 @@ export class AcceuilComponent {
       this.assignmentService.getAssignmentsPagines(this.page, this.limit)
     .subscribe((assignment: any) => {
       this.assignments = assignment.data.docs;
+      this.distributAssignment(this.assignments)
       this.totalDocs = assignment.totalDocs;
       this.totalPages = assignment.totalPages;
       this.nextPage = assignment.nextPage;
@@ -52,19 +62,30 @@ export class AcceuilComponent {
     });
     
     }
+    distributAssignment(arrays:any){
+      for(const element of arrays){
+        if(element.etat=="1"){
+          this.assignments_todo.push(element)
+        }else{
+          this.assignments_done.push(element)
+        }
+      }
+    }
     getAssignmentsFromService() {
       // on récupère les assignments depuis le service
       this.assignmentService.getAssignmentsPagines(this.page, this.limit)
       .subscribe((data:any) => {
         // les données arrivent ici au bout d'un certain temps
         console.log('Données arrivées');
-        this.assignments = data.docs;
-        this.totalDocs = data.totalDocs;
-        this.totalPages = data.totalPages;
-        this.nextPage = data.nextPage;
-        this.prevPage = data.prevPage;
-        this.hasNextPage = data.hasNextPage;
-        this.hasPrevPage = data.hasPrevPage;
+        // console.log(data)
+        this.assignments = data.data.docs;
+        this.distributAssignment(this.assignments)
+        this.totalDocs = data.data.totalDocs;
+        this.totalPages = data.data.totalPages;
+        this.nextPage = data.data.nextPage;
+        this.prevPage = data.data.prevPage;
+        this.hasNextPage = data.data.hasNextPage;
+        this.hasPrevPage = data.data.hasPrevPage;
       });
       console.log('Requête envoyée');
     }
@@ -95,4 +116,19 @@ export class AcceuilComponent {
       this.limit = event.pageSize;
       this.getAssignmentsFromService();
     }
+
+  drop(event: CdkDragDrop<string[]>) {
+    console.log(event)
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex,
+      );
+      this.assignmentService.updateAssignments(event.container.data)
+    }
+  }
 }
