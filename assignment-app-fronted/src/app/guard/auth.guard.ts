@@ -11,6 +11,7 @@ export const authGuard: CanActivateFn = (route, state) => {
     const router = inject(Router);
 
     const notificationService = inject(NotifyServiceService); 
+    
 
     // C'est mieux d'utiliser une Promise car souvent
   // la fonction qui vérifie a besoin de faire une requête

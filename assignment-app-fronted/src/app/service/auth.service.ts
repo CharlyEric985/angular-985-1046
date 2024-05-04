@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { response } from 'express';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
+// import { environment } from '../../environements/environements';
 
 interface AuthStatus {
   isAdmin: boolean;
@@ -17,7 +18,7 @@ export class AuthService {
   loggedIn = false;
   isAdminUser = false;
   token = "";
-  uri = "http://localhost:3500/api/login";
+  uri = "https://backend-projet-m2.onrender.com/api/login";
   private localStorageKey = 'currentUser';
 
 
@@ -39,6 +40,7 @@ export class AuthService {
             console.log("response", response);
             if (response.statue === 'ok') {
               console.log("ok");
+            //  console.log(environment.apiUrl);
               // Update login status
               this.loggedIn = true;
               // Update admin status based on API response

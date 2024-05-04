@@ -10,6 +10,7 @@ export const authCommunGuard: CanActivateFn = (route, state) => {
 
   const notificationService = inject(NotifyServiceService);
 
+
   return authService.isVerify()
   .then(response => {
       if (response.loggedIn) {
