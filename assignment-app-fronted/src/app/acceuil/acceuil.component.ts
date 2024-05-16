@@ -11,6 +11,7 @@ import {MatTable, MatTableModule} from '@angular/material/table';
 import { MatPaginatorModule,PageEvent } from '@angular/material/paginator';
 import { MatListModule } from '@angular/material/list';
 import { MatSliderModule } from '@angular/material/slider';
+import { NavbarComponent } from '../shared/navbar/navbar.component';
 import {
   CdkDragDrop,
   moveItemInArray,
@@ -27,7 +28,7 @@ import {
     RouterLink,
     MatButtonModule,
     MatTable, MatTableModule, MatPaginatorModule,
-    MatListModule, MatSliderModule],
+    MatListModule, MatSliderModule,NavbarComponent],
   templateUrl: './acceuil.component.html',
   styleUrl: './acceuil.component.css'
 })
