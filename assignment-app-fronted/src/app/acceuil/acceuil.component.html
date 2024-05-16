@@ -1,72 +1,78 @@
 <app-navbar></app-navbar>
-<h2>{{ titre }}</h2>
-  <p>Nb documents : {{totalDocs}}, nbPages : {{totalPages}}
-    <br>
-  Page courante : {{page}}, nb de docs par page : {{limit}}
-  <!-- add slider for adjusting the limit property, with angular 17 -->
-  <mat-slider
-    min="1"
-    max="10"
-    step="1"
-    thumbLabel
-  >
-  <input matSliderThumb [(ngModel)]="limit" (change)="getAssignmentsFromService()">
-</mat-slider>
-</p>
-  <div>
-    <button mat-raised-button color="primary"
-            [disabled]="!hasPrevPage"
-            [disabled]="!hasPrevPage"
-            (click)="premierePage()">Première
-    </button>
-    &nbsp;&nbsp;&nbsp;
-    <button mat-raised-button color="primary"
-            [disabled]="!hasPrevPage"
-            (click)="pagePrecedente()">Précédent
-    </button>
-    &nbsp;&nbsp;&nbsp;
-    <button mat-raised-button color="primary"
-            [disabled]="!hasNextPage"
-            (click)="pageSuivante()">Suivante
-    </button>
-    &nbsp;&nbsp;&nbsp;
-    <button mat-raised-button color="primary"
-            [disabled]="!hasNextPage"
-            (click)="dernierePage()">Dernière
-    </button>
-  </div>
+<mat-sidenav-container class="container" autosize>
+  <app-sidenav></app-sidenav>
+  <div class="example-sidenav-content">
+    <h2>{{ titre }}</h2>
+    <p>Nb documents : {{totalDocs}}, nbPages : {{totalPages}}
+      <br>
+    Page courante : {{page}}, nb de docs par page : {{limit}}
+    <!-- add slider for adjusting the limit property, with angular 17 -->
+    <mat-slider
+      min="1"
+      max="10"
+      step="1"
+      thumbLabel
+    >
+    <input matSliderThumb [(ngModel)]="limit" (change)="getAssignmentsFromService()">
+  </mat-slider>
+  </p>
+    <div>
+      <button mat-raised-button color="primary"
+              [disabled]="!hasPrevPage"
+              [disabled]="!hasPrevPage"
+              (click)="premierePage()">Première
+      </button>
+      &nbsp;&nbsp;&nbsp;
+      <button mat-raised-button color="primary"
+              [disabled]="!hasPrevPage"
+              (click)="pagePrecedente()">Précédent
+      </button>
+      &nbsp;&nbsp;&nbsp;
+      <button mat-raised-button color="primary"
+              [disabled]="!hasNextPage"
+              (click)="pageSuivante()">Suivante
+      </button>
+      &nbsp;&nbsp;&nbsp;
+      <button mat-raised-button color="primary"
+              [disabled]="!hasNextPage"
+              (click)="dernierePage()">Dernière
+      </button>
+    </div>
+  
+          <div class="example-container">
+            <h2>To do</h2>
+          
+            <div
+              cdkDropList
+              #todoList="cdkDropList"
+              [cdkDropListData]="assignments_todo"
+              [cdkDropListConnectedTo]="[doneList]"
+              class="example-list"
+              (cdkDropListDropped)="drop($event)">
+              @for(a of assignments_todo; track assignments_todo) {
+                <app-assignment  [id]="a._id"></app-assignment>
+            }
+            </div>
+          </div>
+          
+          <div class="example-container">
+            <h2>Done</h2>
+          
+            <div
+              cdkDropList
+              #doneList="cdkDropList"
+              [cdkDropListData]="assignments_done"
+              [cdkDropListConnectedTo]="[todoList]"
+              class="example-list"
+              (cdkDropListDropped)="drop($event)">
+              @for(a of assignments_done; track assignments_done) {
+                <app-assignment  [id]="a._id"></app-assignment>
+            }
+            </div>
+          </div>
+	</div>
+</mat-sidenav-container>
 
-        <div class="example-container">
-          <h2>To do</h2>
-        
-          <div
-            cdkDropList
-            #todoList="cdkDropList"
-            [cdkDropListData]="assignments_todo"
-            [cdkDropListConnectedTo]="[doneList]"
-            class="example-list"
-            (cdkDropListDropped)="drop($event)">
-            @for(a of assignments_todo; track assignments_todo) {
-              <app-assignment  [id]="a._id"></app-assignment>
-          }
-          </div>
-        </div>
-        
-        <div class="example-container">
-          <h2>Done</h2>
-        
-          <div
-            cdkDropList
-            #doneList="cdkDropList"
-            [cdkDropListData]="assignments_done"
-            [cdkDropListConnectedTo]="[todoList]"
-            class="example-list"
-            (cdkDropListDropped)="drop($event)">
-            @for(a of assignments_done; track assignments_done) {
-              <app-assignment  [id]="a._id"></app-assignment>
-          }
-          </div>
-        </div>
         
         
 
