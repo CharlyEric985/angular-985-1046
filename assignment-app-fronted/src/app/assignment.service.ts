@@ -13,6 +13,7 @@ export class AssignmentsService {
 
   constructor(private http:HttpClient,  private authService: AuthService, private router: Router) { }
 
+  ///uri = "https://backend-projet-m2.onrender.com/api/assignments";
   uri = "http://localhost:3500/api/assignments";
 
   // retourne tous les assignments
