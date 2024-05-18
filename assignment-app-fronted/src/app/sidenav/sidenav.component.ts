@@ -8,6 +8,8 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatIconModule} from '@angular/material/icon';
 import {DatePipe} from '@angular/common';
 import {MatListModule} from '@angular/material/list';
+import { Route } from '@angular/router';
+import { RouterLink } from '@angular/router'; 
 
 export interface Section {
   name: string;
@@ -17,7 +19,7 @@ export interface Section {
 @Component({
   selector: 'app-sidenav',
   standalone: true,
-  imports: [MatSidenavModule,MatNavList,MatListItem,MatIcon,CommonModule,FormsModule,MatDividerModule,MatIconModule,DatePipe,MatListModule],
+  imports: [MatSidenavModule,MatNavList,MatListItem,MatIcon,CommonModule,FormsModule,MatDividerModule,MatIconModule,DatePipe,MatListModule,RouterLink],
   templateUrl: './sidenav.component.html',
   styleUrl: './sidenav.component.css'
 })
