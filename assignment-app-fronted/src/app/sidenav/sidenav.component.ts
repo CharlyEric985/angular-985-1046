@@ -4,11 +4,20 @@ import { FormsModule } from '@angular/forms';
 import { MatIcon } from '@angular/material/icon';
 import { MatListItem, MatNavList } from '@angular/material/list';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatIconModule} from '@angular/material/icon';
+import {DatePipe} from '@angular/common';
+import {MatListModule} from '@angular/material/list';
+
+export interface Section {
+  name: string;
+  updated: Date;
+}
 
 @Component({
   selector: 'app-sidenav',
   standalone: true,
-  imports: [MatSidenavModule,MatNavList,MatListItem,MatIcon,CommonModule,FormsModule],
+  imports: [MatSidenavModule,MatNavList,MatListItem,MatIcon,CommonModule,FormsModule,MatDividerModule,MatIconModule,DatePipe,MatListModule],
   templateUrl: './sidenav.component.html',
   styleUrl: './sidenav.component.css'
 })
@@ -18,6 +27,7 @@ export class SidenavComponent {
   showSubmenu: boolean = false;
   isShowing = false;
   showSubSubMenu: boolean = false;
+
 
   mouseenter() {
     if (!this.isExpanded) {
@@ -30,4 +40,5 @@ export class SidenavComponent {
       this.isShowing = false;
     }
   }
+
 }

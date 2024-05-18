@@ -18,7 +18,7 @@ export class AuthService {
   loggedIn = false;
   isAdminUser = false;
   token = "";
-  // uri = "https://backend-projet-m2.onrender.com/api/login";
+   //uri = "https://backend-projet-m2.onrender.com/api/login";
   uri = "http://localhost:3500/api/login"
   private localStorageKey = 'currentUser';
 

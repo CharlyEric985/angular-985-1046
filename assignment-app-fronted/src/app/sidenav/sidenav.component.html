@@ -1,14 +1,70 @@
-<mat-sidenav #sidenav class="example-sidenav" mode="side" opened="true" (mouseenter)="mouseenter()"
-    (mouseleave)="mouseleave()">
-    <mat-nav-list>
-        <mat-list-item  class="parent" (click)="showSubmenu = !showSubmenu">
-            <span class="full-width" *ngIf="isExpanded || isShowing">Assignement</span>
-            <mat-icon class="menu-button" [ngClass]="{'rotated' : showSubmenu}"
-                *ngIf="isExpanded || isShowing">expand_more</mat-icon>
-        </mat-list-item>
-        <div class="submenu" [ngClass]="{'expanded' : showSubmenu}" *ngIf="isShowing || isExpanded">
-            <a mat-list-item href="...">Liste</a>
-            <a mat-list-item href="...">Ajout</a>
+<mat-sidenav #sidenav class="example-sidenav" mode="side" opened="true" (mouseenter)="mouseenter()" (mouseleave)="mouseleave()">
+    <mat-list class="liste-nav">     
+        <div class="logo-container">
+            <img src="../../assets/img/logo/assignmentLogo.jpg" alt="Logo" class="assignment-logo">
+            <span class="assignment-texte">Assignment</span>
+        </div>   
+        
+        <div class="section">
+            <div class="subheader" mat-subheader>
+                <mat-icon>assignment</mat-icon>
+                <span>Assignment</span>
+            </div>
+            <div class="assignment-item">
+                <mat-list-item>
+                    <div>
+                        <mat-icon>list</mat-icon>
+                        <span>Liste</span>
+                    </div>
+                   <div>
+                        <mat-icon>note_add</mat-icon>
+                        <span>Ajout</span>
+                   </div>
+                </mat-list-item>
+            </div>
+        </div>   
+        
+        <mat-divider class="hr"></mat-divider>
+
+        <div class="section">
+            <div class="subheader" mat-subheader>
+                <mat-icon>account_circle</mat-icon>
+                <span>Etudiant</span>
+            </div>
+            <div class="etudiant-item">
+                <mat-list-item>
+                    <div>
+                        <mat-icon>list</mat-icon>
+                        <span>Liste</span>
+                    </div>
+                   <div>
+                        <mat-icon>note_add</mat-icon>
+                        <span>Ajout</span>
+                   </div>
+                </mat-list-item>
+            </div>
         </div>
-    </mat-nav-list>
+        
+        <mat-divider class="hr"></mat-divider>
+
+        <div class="section">
+            <div class="subheader" mat-subheader>
+                <mat-icon>subject</mat-icon>
+                <span>Matieres</span>
+            </div>
+            <div class="matiere-item">
+                <mat-list-item>
+                    <div>
+                        <mat-icon>list</mat-icon>
+                        <span>Liste</span>
+                    </div>
+                   <div>
+                        <mat-icon>note_add</mat-icon>
+                        <span>Ajout</span>
+                   </div>
+                </mat-list-item>
+            </div>
+        </div>
+
+    </mat-list>
 </mat-sidenav>
