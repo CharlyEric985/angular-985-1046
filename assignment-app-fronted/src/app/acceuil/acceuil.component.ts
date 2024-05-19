@@ -12,6 +12,9 @@ import { MatPaginatorModule,PageEvent } from '@angular/material/paginator';
 import { MatListModule } from '@angular/material/list';
 import { MatSliderModule } from '@angular/material/slider';
 import { NavbarComponent } from '../shared/navbar/navbar.component';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import { SidenavComponent } from '../sidenav/sidenav.component';
+
 import {
   CdkDragDrop,
   moveItemInArray,
@@ -28,7 +31,7 @@ import {
     RouterLink,
     MatButtonModule,
     MatTable, MatTableModule, MatPaginatorModule,
-    MatListModule, MatSliderModule,NavbarComponent],
+    MatListModule, MatSliderModule,NavbarComponent,MatSidenavModule,SidenavComponent],
   templateUrl: './acceuil.component.html',
   styleUrl: './acceuil.component.css'
 })

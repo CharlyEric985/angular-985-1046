@@ -18,8 +18,9 @@ export class AuthService {
   loggedIn = false;
   isAdminUser = false;
   token = "";
-  // uri = "https://backend-projet-m2.onrender.com/api/login";
-  uri = "http://localhost:3500/api/login"
+   //uri = "https://backend-projet-m2.onrender.com/api/login";
+  uri = "http://localhost:3500/api/login";
+  url = "http://localhost:3500";
   private localStorageKey = 'currentUser';
 
 
@@ -86,6 +87,9 @@ export class AuthService {
     return Promise.resolve({ isAdmin: this.isAdminUser, loggedIn: this.loggedIn });
   }
 
+  getPathChemin () {
+     return this.url+'/'+'file'+'/'+'upload'+'/'+'image';
+  }
   
 
 }

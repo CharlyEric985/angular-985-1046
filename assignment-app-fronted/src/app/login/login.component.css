@@ -31,14 +31,30 @@
    /*background-color: red;*/
   }
 
-  .button {
+  .button-container {
     display: flex;
-    justify-content: flex-end;
-  }
+    justify-content: center;
+    width: 100%; /* Assurez-vous que le conteneur prend toute la largeur */
+}
 
-  .spinner {
+.button-container div,
+.button-container .spinner {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Ajustez la hauteur selon vos besoins */
-  }
+    width: 100%; /* Assurez-vous que les éléments à l'intérieur prennent toute la largeur */
+}
+
+.button-container .spinner {
+    height: 36px; /* Même hauteur que le bouton pour que le spinner prenne sa place */
+}
+
+.btn-style{
+  background-color: #126f7e;
+  border-radius: 17px;
+}
+
+.text-conn{
+  color: white;
+}
+
