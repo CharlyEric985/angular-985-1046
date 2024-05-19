@@ -33,7 +33,7 @@ export class LoginComponent {
     const { email, mdp } = this.form.value;
     
     // Utilisez setTimeout pour ajouter un délai avant que le spinner n'apparaisse
-    setTimeout(() => {
+   
       this.authService.login(email, mdp).subscribe(
         (response) => {
           // Connexion réussie
@@ -46,6 +46,6 @@ export class LoginComponent {
       ).add(() => {
         this.isLoading = false; // Assurez-vous d'arrêter le spinner que la requête soit réussie ou non
       });
-    }, 2000); // 2000ms (2 secondes) de délai avant que le spinner n'apparaisse
+    // 2000ms (2 secondes) de délai avant que le spinner n'apparaisse
   }
 }

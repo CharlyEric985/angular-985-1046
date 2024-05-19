@@ -13,9 +13,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; // Import FormsModule
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { RouterLink } from '@angular/router'; 
-export interface PeriodicElement {
+import { Router } from '@angular/router';
+export interface Etudiant {
   photo: string;
-  name: number;
+  name: string;
+  prenom : string;
+  dateNaissance : string;
   action: number;
 }
 
@@ -33,7 +36,7 @@ export interface PeriodicElement {
   styleUrl: './etudiant.component.css'
 })
 export class EtudiantComponent implements OnInit{
-  data :PeriodicElement[] = [];
+  data :Etudiant[] = [];
   path: any;
   isLoading: boolean = false;
   searchText : any;
@@ -43,10 +46,10 @@ export class EtudiantComponent implements OnInit{
   totalPages: number = 0;
   pageNumbers: number[] = [];
 
-  constructor(private  serviceEtudiant : EtudiantService,private authService : AuthService) { 
+  constructor(private  serviceEtudiant : EtudiantService,private authService : AuthService,private router: Router) { 
    }
 
-  displayedColumns: string[] = ['photo', 'name', 'action'];
+  displayedColumns: string[] = ['photo', 'name','prenom','dateNaissance', 'action'];
 
   ngOnInit() { 
     console.log(this.searchQuery);
@@ -57,20 +60,17 @@ export class EtudiantComponent implements OnInit{
   fetchData (search: string,page: number) {
     this.isLoading = true;
     this.searchText = search ? search : "";
-    setTimeout(() => {
-      this.serviceEtudiant.getsEtudiants(this.searchText, page, 2).subscribe((etudiant: any) => {
+      this.serviceEtudiant.getsEtudiants(this.searchText, page, 1).subscribe((etudiant: any) => {
         this.data = etudiant.data.docs;
         this.totalPages = etudiant.data.totalPages;
+        this.currentPage = page;
         this.generatePageNumbers();
         this.isLoading = false;
-        //console.log("data", this.data);
       });
-    }, 3000);
   }
 
   getPath () {
      this.path =  this.authService.getPathChemin();
-     console.log(this.path)
   }
 
   generatePageNumbers() {
@@ -79,8 +79,6 @@ export class EtudiantComponent implements OnInit{
     for (let i = 1; i <= this.totalPages; i++) {
       this.pageNumbers.push(i);
     }
-
-    console.log(this.pageNumbers);
   }
 
   goToPage(page: number) {
@@ -96,15 +94,19 @@ export class EtudiantComponent implements OnInit{
         this.fetchData('',this.currentPage);
     } else {
         // Sinon, effectuez la recherche en utilisant la valeur de l'entrée de recherche
-        this.fetchData(this.searchQuery.trim(),this.currentPage);
+        this.fetchData(this.searchQuery.trim(), 1);
     }
   }
 
   onSearchInputChange() {
     // Si l'entrée de recherche devient vide, afficher toutes les données
     if (!this.searchQuery || this.searchQuery.trim() === '') {
-        this.fetchData('',this.currentPage);
+        this.fetchData('', 1);
     }
+}
+
+editStudent(id: string) {
+  this.router.navigate(['/etudiant/detail', id]);
 }
 
 }

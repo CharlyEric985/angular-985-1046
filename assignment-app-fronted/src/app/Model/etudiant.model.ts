@@ -1,5 +1,7 @@
 export class Etudiant {
     _id?:  String;
-    nom!: String;
-    photo! : String;
+    nom!: string;
+    prenom! : string;
+    dateNaissance!: Date;
+    photo! : string;
 }

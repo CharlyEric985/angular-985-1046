@@ -16,6 +16,6 @@ export const routes: Routes = [
     //Etudiant
     {path: 'etudiant', component: EtudiantComponent, canActivate: [authCommunGuard]},
     {path: 'etudiant/form', component: FormComponent,  canActivate: [authCommunGuard]},
-    {path: 'etudiant/detail', component: DetailComponent,  canActivate: [authCommunGuard]},
+    {path: 'etudiant/detail/:id', component: FormComponent,  canActivate: [authCommunGuard]},
 
 ];
