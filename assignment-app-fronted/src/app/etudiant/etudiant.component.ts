@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavbarComponent } from '../shared/navbar/navbar.component';
 import { SidenavComponent } from '../sidenav/sidenav.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
@@ -6,38 +6,105 @@ import {MatTableModule} from '@angular/material/table';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {TooltipPosition, MatTooltipModule} from '@angular/material/tooltip';
-
+import { EtudiantService } from '../service/etudiant/etudiant.service';
+import { AuthService } from '../service/auth.service';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms'; // Import FormsModule
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { RouterLink } from '@angular/router'; 
 export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
+  photo: string;
+  name: number;
+  action: number;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, },
-  {position: 2, name: 'Helium', weight: 4.0026},
-  {position: 3, name: 'Lithium', weight: 6.941},
-  {position: 4, name: 'Beryllium', weight: 9.0122},
-  {position: 5, name: 'Boron', weight: 10.811},
-  {position: 6, name: 'Carbon', weight: 12.0107},
-  {position: 7, name: 'Nitrogen', weight: 14.0067},
-  {position: 8, name: 'Oxygen', weight: 15.9994},
-  {position: 9, name: 'Fluorine', weight: 18.9984},
-  {position: 10, name: 'Neon', weight: 20.1797},
-];
+
 
 
 
 @Component({
   selector: 'app-etudiant',
   standalone: true,
-  imports: [SidenavComponent, NavbarComponent,MatSidenavModule,MatTableModule,MatIconModule,MatButtonModule, MatTooltipModule],
+  imports: [SidenavComponent, NavbarComponent,MatSidenavModule,
+    MatTableModule,MatIconModule,MatButtonModule, MatTooltipModule,MatProgressSpinnerModule,
+    CommonModule,FormsModule,MatPaginatorModule,RouterLink],
   templateUrl: './etudiant.component.html',
   styleUrl: './etudiant.component.css'
 })
-export class EtudiantComponent {
+export class EtudiantComponent implements OnInit{
+  data :PeriodicElement[] = [];
+  path: any;
+  isLoading: boolean = false;
+  searchText : any;
+  searchQuery: string = ''; // Propriété pour stocker la valeur de recherche
+  
+  currentPage: number = 1;
+  totalPages: number = 0;
+  pageNumbers: number[] = [];
 
-  displayedColumns: string[] = ['position', 'name', 'weight'];
-  dataSource = ELEMENT_DATA;
+  constructor(private  serviceEtudiant : EtudiantService,private authService : AuthService) { 
+   }
+
+  displayedColumns: string[] = ['photo', 'name', 'action'];
+
+  ngOnInit() { 
+    console.log(this.searchQuery);
+    this.fetchData(this.searchText,this.currentPage);
+    this.getPath();
+  }
+
+  fetchData (search: string,page: number) {
+    this.isLoading = true;
+    this.searchText = search ? search : "";
+    setTimeout(() => {
+      this.serviceEtudiant.getsEtudiants(this.searchText, page, 2).subscribe((etudiant: any) => {
+        this.data = etudiant.data.docs;
+        this.totalPages = etudiant.data.totalPages;
+        this.generatePageNumbers();
+        this.isLoading = false;
+        //console.log("data", this.data);
+      });
+    }, 3000);
+  }
+
+  getPath () {
+     this.path =  this.authService.getPathChemin();
+     console.log(this.path)
+  }
+
+  generatePageNumbers() {
+    
+    this.pageNumbers = [];
+    for (let i = 1; i <= this.totalPages; i++) {
+      this.pageNumbers.push(i);
+    }
+
+    console.log(this.pageNumbers);
+  }
+
+  goToPage(page: number) {
+    console.log(page);
+    if (page !== this.currentPage) {
+      this.fetchData(this.searchText, page);
+    }
+  }
+
+  search() {
+    if (!this.searchQuery || this.searchQuery.trim() === '') {
+        // Si la recherche est vide, récupérez toutes les données
+        this.fetchData('',this.currentPage);
+    } else {
+        // Sinon, effectuez la recherche en utilisant la valeur de l'entrée de recherche
+        this.fetchData(this.searchQuery.trim(),this.currentPage);
+    }
+  }
+
+  onSearchInputChange() {
+    // Si l'entrée de recherche devient vide, afficher toutes les données
+    if (!this.searchQuery || this.searchQuery.trim() === '') {
+        this.fetchData('',this.currentPage);
+    }
+}
 
 }

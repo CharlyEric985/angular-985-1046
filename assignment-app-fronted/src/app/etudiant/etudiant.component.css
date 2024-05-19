@@ -48,7 +48,24 @@
   }
 
   .assignment-logo {
-    height: 70x; /* Adjust the height as needed */
-    width: 70px; /* Make sure width matches height for a round shape */
+    height: 50x; /* Adjust the height as needed */
+    width: 50px; /* Make sure width matches height for a round shape */
     border-radius: 50%; /* Make the image round */
+  }
+
+  h1{
+    font-size: 35px;
+    height: 55px;
+    font-style: italic;
+  }
+
+  .spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 400px; /* Adjust height as needed to vertically center */
+}
+
+.btn-customize {
+   background-color:  #c1c6c6;
 }
