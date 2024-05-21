@@ -8,6 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../service/auth.service';
 import { Router } from '@angular/router';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -25,7 +26,7 @@ export class LoginComponent {
   isLoading: boolean = false; // Ajout de la propriété pour gérer l'état du spinner
 
 
-  constructor(private authService: AuthService,private router: Router) {} // Injectez le service AuthService
+  constructor(private authService: AuthService,private router: Router,private toastr: ToastrService) {} // Injectez le service AuthService
 
  
   submit() {
@@ -36,7 +37,7 @@ export class LoginComponent {
    
       this.authService.login(email, mdp).subscribe(
         (response) => {
-          // Connexion réussie
+          //this.toastr.success('Connexion', 'réussi', {timeOut : 5000});
           this.router.navigateByUrl('/acceuil');
         },
         (error: string) => {

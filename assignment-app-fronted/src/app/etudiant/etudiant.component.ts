@@ -109,4 +109,8 @@ editStudent(id: string) {
   this.router.navigate(['/etudiant/detail', id]);
 }
 
+detailStudent(id :string) {
+  this.router.navigate(['/etudiant/detail-etudiant', id]);
+}
+
 }

@@ -1,0 +1,56 @@
+<app-navbar></app-navbar>
+<app-sidenav></app-sidenav>
+<mat-sidenav-container autosize>
+    <div class="container">
+        <div class="row">
+            <div class="col-5">
+                <h1>Prof</h1>
+                <div class="photo">
+                    <img [src]="imageUrl" class="rounded-circle" width="150px" height="150px" alt="...">
+                </div>
+                <div class="btn-photo">
+                    <button class="btn btn-customize" type="button">
+                       Ajouter photo
+                    </button>
+                </div>
+            </div>
+            <div class="col-5">
+                <h1>Matiere</h1>
+                <div class="photo">
+                    <img [src]="imageUrlM" class="" width="150px" height="150px" alt="...">
+                </div>
+                <div class="btn-photo">
+                    <button class="btn btn-customize" type="button">
+                       Ajouter photo
+                    </button>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8">
+                <div class="row">
+                        <mat-form-field appearance="outline" class="titre-matiere">
+                            <mat-label>Titre matière</mat-label>
+                            <input matInput formControlName="titre">
+                        </mat-form-field>
+                </div>
+                <div class="row">
+                    <mat-form-field appearance="outline" class="titre-prof">
+                        <mat-label>Séléctionner une prof </mat-label>
+                        <mat-select>
+                          @for (prof of profs; track prof) {
+                            <mat-option [value]="prof.value">{{prof.viewValue}}</mat-option>
+                          }
+                        </mat-select>
+                      </mat-form-field>
+                </div>
+                <div class="row mt-2">
+                    <button class="btn btn-form" type="submit">Ajouter</button>
+                </div>
+            </div>
+            <div class="col-2"></div>
+        </div>
+    </div>
+</mat-sidenav-container>
