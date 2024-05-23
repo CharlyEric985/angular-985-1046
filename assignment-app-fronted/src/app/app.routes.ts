@@ -6,11 +6,12 @@ import { authCommunGuard } from './guard/auth-commun.guard';
 import { EtudiantComponent } from './etudiant/etudiant.component';
 import { FormComponent } from './etudiant/form/form.component';
 import { DetailComponent } from './etudiant/detail/detail.component';
+import { AssignmentComponent } from './shared/assignment/assignment.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: 'home', component: LoginComponent},
-    { path: 'acceuil', component: AcceuilComponent, canActivate: [authCommunGuard] },
+    { path: 'acceuil', component: AssignmentComponent, canActivate: [authCommunGuard] },
     //{ path: 'acceuil', component: AcceuilComponent}
 
     //Etudiant

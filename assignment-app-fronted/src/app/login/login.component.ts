@@ -35,7 +35,7 @@ export class LoginComponent {
     // Utilisez setTimeout pour ajouter un délai avant que le spinner n'apparaisse
     setTimeout(() => {
       this.authService.login(email, mdp).subscribe(
-        (response) => {
+        (response:any) => {
           // Connexion réussie
           this.router.navigateByUrl('/acceuil');
         },
