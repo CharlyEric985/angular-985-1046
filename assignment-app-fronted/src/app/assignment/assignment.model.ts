@@ -1,6 +1,12 @@
 export class Assignment {
   _id?: string;
-  nom!: string;
+  titre!: string;
+  description!: string;
   dateDeRendu!: Date;
-  rendu!: boolean;
+  rendu!: Boolean;
+  auteur!: string;
+  matiere!: string;
+  note!:string;
+  remarque!: string;
+  annuler!: string;
 }

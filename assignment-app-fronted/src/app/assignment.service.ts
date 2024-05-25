@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { Assignment } from './shared/assignment/assignment.model';
+import { Assignment } from './assignment/assignment.model';
 import { AuthService } from './service/auth.service';
 import { Router } from '@angular/router';
 

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { AssignmentComponent } from '../shared/assignment/assignment.component';
+import { AssignmentComponent } from '../assignment/assignment.component';
 import { AssignmentsService } from '../assignment.service';
 
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { Assignment } from '../shared/assignment/assignment.model';
+import { Assignment } from '../assignment/assignment.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
