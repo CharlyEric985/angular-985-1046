@@ -1,1 +1,38 @@
-<p>detail works!</p>
+<app-navbar></app-navbar>
+<app-sidenav></app-sidenav>
+<mat-sidenav-container autosize>
+    <div class="container">
+        <div class="detail" *ngIf="!isLoading; else spinner">
+            <div class="row">
+                <div class="col-5">
+                    <h1>Prof</h1>
+                    <div class="photo">
+                        <img [src]="imageUrl" class="rounded-circle" width="150px" height="150px" alt="...">
+                    </div>
+                </div>
+                <div class="col-5">
+                    <h1>Matiere</h1>
+                    <div class="photo">
+                        <img [src]="imageUrlM" class="" width="150px" height="150px" alt="...">
+                    </div>
+    
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-2"></div>
+                <div class="col-8">
+                    <div class="row">
+                          <span><h2>Titre du matière : {{ data.nom }}</h2></span>
+                          <span><h2>Proffesseur : {{ data.professeur }}</h2></span>
+                    </div>
+                </div>
+                <div class="col-2"></div>
+            </div>
+        </div>
+        <ng-template #spinner>
+            <div class="spinner-container">
+                <mat-spinner></mat-spinner>
+            </div>
+        </ng-template>
+    </div>
+</mat-sidenav-container>

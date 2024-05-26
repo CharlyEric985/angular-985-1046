@@ -35,13 +35,8 @@ export const authGuard: CanActivateFn = (route, state) => {
   )*/
   return authService.isVerify()
   .then(response => {
-      console.log("isAdmin", response.isAdmin);
-      console.log("isAdmin", response.loggedIn);
-  
       if (response.loggedIn) {
-        console.log("connecté");
         if(response.isAdmin){
-          console.log("isAdmin", response.isAdmin);
           return true;
         }else{
           notificationService.error("Vous avez aucun droit pour cette action");

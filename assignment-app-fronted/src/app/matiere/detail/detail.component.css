@@ -1,0 +1,13 @@
+.container {
+    /* //height: 800px;  */
+    margin-left: 30%;
+    margin-top: 20px;
+    /* border: 1px solid rgba(0, 0, 0, 0.5); */
+}
+
+.spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 400px; /* Adjust height as needed to vertically center */
+}

@@ -101,3 +101,11 @@
 .hr{
   margin-top: 35px;
 }
+
+.nav-link {
+  display: block;
+  padding: 0;
+  color: #0d6efd;
+  text-decoration: none;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
+}
