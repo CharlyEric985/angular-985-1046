@@ -1,11 +1,4 @@
-.container {
-    height: 800px; 
-    margin-left: 20%;
-    margin-top: 20px;
-    /* border: 1px solid rgba(0, 0, 0, 0.5); */
-  }
 
- 
 
   .custom-table{
     margin-top: 20px;
@@ -68,4 +61,12 @@
 
 .btn-customize {
    background-color:  #c1c6c6;
+}
+
+.detail{
+  background-color:  #c1c6c6;
+}
+
+.content {
+  margin-top: 3%;
 }

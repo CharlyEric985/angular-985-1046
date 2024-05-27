@@ -87,6 +87,10 @@ export class AuthService {
     return Promise.resolve({ isAdmin: this.isAdminUser, loggedIn: this.loggedIn });
   }
 
+  getIsAdmin() {
+     return this.isAdminUser;
+  }
+
   getPathChemin () {
      return this.url+'/'+'file'+'/'+'upload'+'/'+'image';
   }

@@ -5,8 +5,12 @@ import { authGuard } from './guard/auth.guard';
 import { authCommunGuard } from './guard/auth-commun.guard';
 import { EtudiantComponent } from './etudiant/etudiant.component';
 import { FormComponent } from './etudiant/form/form.component';
-import { DetailComponent } from './etudiant/detail/detail.component';
 import { AssignmentComponent } from './assignment/assignment.component';
+import { MatiereComponent } from './matiere/matiere.component';
+import { FormMatiereComponent } from './matiere/form-matiere/form-matiere.component';
+import { DetailEtudiantComponent } from './etudiant/detail-etudiant/detail-etudiant.component';
+import { DetailComponent } from './matiere/detail/detail.component';
+
 
 export const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -17,6 +21,14 @@ export const routes: Routes = [
     //Etudiant
     {path: 'etudiant', component: EtudiantComponent, canActivate: [authCommunGuard]},
     {path: 'etudiant/form', component: FormComponent,  canActivate: [authCommunGuard]},
-    {path: 'etudiant/detail', component: DetailComponent,  canActivate: [authCommunGuard]},
+    {path: 'etudiant/detail/:id', component: FormComponent,  canActivate: [authGuard]},
+    {path: 'etudiant/detail-etudiant/:id', component: DetailEtudiantComponent,  canActivate: [authCommunGuard]},
 
+    //Matiere
+    {path: 'matiere', component: MatiereComponent, canActivate : [authCommunGuard]},
+    {path: 'matiere/ajout', component : FormMatiereComponent, canActivate : [authCommunGuard]},
+    {path: 'matiere/edit/:id', component : FormMatiereComponent, canActivate : [authGuard]},
+    {path:'matiere/detail/:id', component : DetailComponent, canActivate : [authCommunGuard]}
+    
+    
 ];

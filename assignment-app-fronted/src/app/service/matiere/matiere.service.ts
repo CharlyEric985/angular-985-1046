@@ -4,25 +4,25 @@ import { catchError } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { Matiere } from '../../Model/matiere.model';
 import { Etudiant } from '../../Model/etudiant.model';
-
 @Injectable({
   providedIn: 'root'
 })
-export class EtudiantService {
-
+export class MatiereService {
 
   constructor(private http:HttpClient,  private authService: AuthService, private router: Router) { }
 
-  uri = "http://localhost:3500/api/auteur";
+  uri = "http://localhost:3500/api/matiere";
 
-  getsEtudiants(search: string,page: number, limit: number):Observable<any> {
+
+  getMatieres (search: string,page: number, limit: number):Observable<any> {
 
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.authService.getToken()}` // Use the token from AuthService
     });
 
-    return this.http.get<Etudiant[]>(`${this.uri}?search=${search}&page=${page}&limit=${limit}`, { headers })
+    return this.http.get<Matiere[]>(`${this.uri}?search=${search}&page=${page}&limit=${limit}`, { headers })
     .pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.status === 403) {
@@ -37,19 +37,22 @@ export class EtudiantService {
 
   }
 
-  addEtudiant(etudiant : Etudiant, file : File) : Observable<Etudiant>{
+  addMatiere(matiere : Matiere, fileProf : File, fileMatiere : File) : Observable<Matiere>{
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.authService.getToken()}` // Use the token from AuthService
     });
 
     const formData = new FormData();
-    formData.append('nom', etudiant.nom);
-    formData.append('prenom', etudiant.prenom);
-    formData.append('dateNaissance', etudiant.dateNaissance.toISOString());
-    if (file) {
-      formData.append('photo', file, file.name);
+    formData.append('nom', matiere.nom);
+    formData.append('professeur', matiere.professeur);
+    if (fileProf) {
+      formData.append('photo_prof', fileProf, fileProf.name);
     }
-    return this.http.post<Etudiant>(this.uri, formData, {headers}).pipe(
+    if(fileMatiere) {
+      formData.append('photo', fileMatiere, fileMatiere.name);
+    }
+
+    return this.http.post<Matiere>(this.uri, formData, {headers}).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.status === 403) {
 
@@ -62,45 +65,47 @@ export class EtudiantService {
     );
   }
 
-  updateEtudiant(data : {id: string, etudiant : Etudiant}, file : File | null): Observable<Etudiant>{
+  getMatiere(id : string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.authService.getToken()}` // Use the token from AuthService
+    });
+
+    return this.http.get<Matiere>(`${this.uri}/${id}`, {headers}).pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error.status === 403) {
+
+          this.authService.logout();
+          // Rediriger vers la page d'accueil en cas d'erreur 403 (token invalide ou expiré)
+        }
+        // Propager l'erreur au composant consommateur
+        throw error;
+      })
+    );
+  }
+
+  updateMatiere(data : {id: string, matiere : Matiere}, fileProf : File | null, fileMatiere : File | null): Observable<Matiere>{
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.authService.getToken()}` // Use the token from AuthService
     });
 
     const formData = new FormData();
     formData.append('id', data.id);
-    formData.append('etudiant', JSON.stringify(data.etudiant));
-    if (file) {
-      formData.append('photo', file, file.name);
+    formData.append('matiere', JSON.stringify(data.matiere));
+    if (fileProf) {
+      formData.append('photo_prof', fileProf, fileProf.name);
     }
+    if(fileMatiere) {
+      formData.append('photo', fileMatiere, fileMatiere.name);
+    }
+
+    console.log("formData", formData);
     
-    return this.http.put<Etudiant>(this.uri, formData, {headers}).pipe(
+    return this.http.put<Matiere>(this.uri, formData, {headers}).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.status === 403) {
 
           this.authService.logout();
           // Rediriger vers la page d'accueil en cas d'erreur 403 (token invalide ou expiré)
-        }
-        // Propager l'erreur au composant consommateur
-        throw error;
-      })
-    );
-  }
-
-  getEtudiant(id : string): Observable<any> {
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.authService.getToken()}` // Use the token from AuthService
-    });
-
-    return this.http.get<Etudiant>(`${this.uri}/${id}`, {headers}).pipe(
-      catchError((error: HttpErrorResponse) => {
-        if (error.status === 403) {
-          this.authService.logout();
-          // Rediriger vers la page d'accueil en cas d'erreur 403 (token invalide ou expiré)
-        }
-
-        if(error.status === 500) {
-          this.authService.logout();
         }
         // Propager l'erreur au composant consommateur
         throw error;

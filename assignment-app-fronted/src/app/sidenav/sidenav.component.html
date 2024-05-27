@@ -17,8 +17,10 @@
                         <span>Liste</span>
                     </div>
                    <div>
+                    <a routerLink="/assignment/add" class="nav-link">
                         <mat-icon>note_add</mat-icon>
-                        <span>Ajout</span>
+                        <span>Add</span>
+                    </a>
                    </div>
                 </mat-list-item>
             </div>
@@ -47,7 +49,10 @@
                     </div>
                     
                    
-                    
+                    <a routerLink="/etudiant/form" class="nav-link">
+                        <mat-icon>note_add</mat-icon>
+                        <span>Add</span>
+                    </a>
                 </mat-list-item>
             </div>
         </div>
@@ -61,14 +66,15 @@
             </div>
             <div class="matiere-item">
                 <mat-list-item>
-                    <div>
+                    <a routerLink="/matiere" class="nav-link">
                         <mat-icon>list</mat-icon>
                         <span>Liste</span>
-                    </div>
-                   <div>
-                        <mat-icon>note_add</mat-icon>
-                        <span>Ajout</span>
-                   </div>
+                </a>
+               
+                <a routerLink="/matiere/ajout" class="nav-link">
+                    <mat-icon>note_add</mat-icon>
+                    <span>Add</span>
+                </a>
                 </mat-list-item>
             </div>
         </div>
