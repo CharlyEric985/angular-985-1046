@@ -9,6 +9,6 @@
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-button (click)="onNoClick()" [mat-dialog-close]="data">No Thanks</button> 
-  <button mat-button (click)="onYesClick()" [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
 </mat-dialog-actions>
 </form>

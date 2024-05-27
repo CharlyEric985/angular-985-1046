@@ -11,7 +11,7 @@
       class="example-list"
       (cdkDropListDropped)="drop($event)">
       @for (item of todo; track item) {
-        <mat-card class="example-box" cdkDrag>
+        <mat-card class="example-box" [cdkDragDisabled]="false" cdkDrag>
           <mat-card-header>
             <mat-card-title>{{item.titre}}</mat-card-title>
           </mat-card-header>
@@ -41,7 +41,7 @@
       class="example-list"
       (cdkDropListDropped)="drop($event)">
       @for (item of done; track item) {
-        <mat-card class="example-box" cdkDrag>
+        <mat-card class="example-box"  [cdkDragDisabled]="true" cdkDrag>
           <mat-card-header>
             <mat-card-title>{{item.titre}}</mat-card-title>
           </mat-card-header>

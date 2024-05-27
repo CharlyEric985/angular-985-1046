@@ -51,62 +51,67 @@ export class AssignmentComponent {
   //     this.done.push(...dataList.filter(item => item.etat === 1));
   //   });
   // });
-    this.done=[
-      { titre: 'Assignment 1', rendu: true },
-      { titre: 'Assignment 3', rendu: true },
-    ];
-    this.todo=[
-      { titre: 'Assignment 2', rendu: false },
-      { titre: 'Assignment 4', rendu: false }
-    ]
-
+  const limit:number=10;
+  const page: number=1;
+    this.assignmentService.getAssignmentsRendu(limit,page,true).subscribe((assignment: any) => {
+      this.done = assignment.data.docs;
+      // this.totalPages = matiere.data.totalPages;
+      // this.currentPage = page;
+      // this.generatePageNumbers();
+      // this.isLoading = false;
+    });
+    this.assignmentService.getAssignmentsRendu(limit,page,false).subscribe((assignment: any) => {
+      this.todo = assignment.data.docs;
+      // this.totalPages = matiere.data.totalPages;
+      // this.currentPage = page;
+      // this.generatePageNumbers();
+      // this.isLoading = false;
+    });
+    
   }
   drop(event: CdkDragDrop<Assignment[]>) {
-    
+
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
       // datainstance.rendu=false
-      // console.log(datainstance)
+      
     } else {
-      
-      let datainstance=event.container.data[event.currentIndex]
-      console.log(event.container)
-      
+      console.log(event.currentIndex)
+      let datainstance=event.previousContainer.data[event.previousIndex]
+      console.log(event.container.data)
+      console.log(datainstance.rendu)
+      console.log(datainstance)
+
       // console.log(this.dialog)
       // event.container.data[event.currentIndex].rendue=true
-      if(datainstance.rendu==true)
+      if(datainstance.rendu===false)
       {
-        datainstance.rendu=false
         const dialoginstance=this.dialog.open(DialogElementsExampleDialogComponent,{
           data:datainstance,
           disableClose: true,  // Empêche la fermeture en cliquant en dehors ou avec la touche Escape
           hasBackdrop: true    // Affiche le fond noir
         });
+        console.log(datainstance)
         dialoginstance.afterClosed().subscribe((result: Assignment) => {
           console.log('The dialog was closed');
           datainstance = result;
-          console.log(datainstance)
-          if(datainstance.annuler=="1"){
+          if(datainstance.note!==undefined){
             transferArrayItem(
               event.previousContainer.data,
               event.container.data,
               event.previousIndex,
               event.currentIndex,
             );
+            console.log(datainstance)
           }
-          console.log(datainstance)
-        });
-      }else{
-        datainstance.rendu=true
-        this.dialog.open(DialogElementsExampleDialogComponent,{
-          data:datainstance,
-          disableClose: true,  // Empêche la fermeture en cliquant en dehors ou avec la touche Escape
-          hasBackdrop: true    // Affiche le fond noir
-        });
+           
+          }
+        // console.log(datainstance)
+      );
       }
-      console.log(datainstance)
-      
-      
+      // console.log(datainstance)
+
+
     }
   }
 }

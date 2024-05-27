@@ -8,5 +8,4 @@ export class Assignment {
   matiere!: string;
   note!:string;
   remarque!: string;
-  annuler!: string;
 }
