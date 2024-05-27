@@ -25,7 +25,7 @@ export class DetailComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.routes.paramMap.subscribe(params => {
+    this.routes.paramMap.subscribe((params:any) => {
       this.matieretId = params.get('id');
       if (this.matieretId) {
         this.detailMatiere(this.matieretId);

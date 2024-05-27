@@ -48,7 +48,7 @@ export class FormComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
+    this.route.paramMap.subscribe((params:any) => {
       this.studentId = params.get('id');
       if (this.studentId) {
         this.fetchData(this.studentId);

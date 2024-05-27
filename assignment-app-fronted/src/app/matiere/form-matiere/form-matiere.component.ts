@@ -55,7 +55,7 @@ export class FormMatiereComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
+    this.route.paramMap.subscribe((params:any) => {
       this.matiereId = params.get('id');
       if (this.matiereId) {
         this.fetchData(this.matiereId);

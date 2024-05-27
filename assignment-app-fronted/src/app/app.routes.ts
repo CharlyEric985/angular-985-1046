@@ -10,12 +10,16 @@ import { MatiereComponent } from './matiere/matiere.component';
 import { FormMatiereComponent } from './matiere/form-matiere/form-matiere.component';
 import { DetailEtudiantComponent } from './etudiant/detail-etudiant/detail-etudiant.component';
 import { DetailComponent } from './matiere/detail/detail.component';
+import { FormAssignmentComponent } from './assignment/form-assignment/form-assignment.component';
+import { DetailAssignmentComponent } from './assignment/detail-assignment/detail-assignment.component';
 
 
 export const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: 'home', component: LoginComponent},
     { path: 'acceuil', component: AssignmentComponent, canActivate: [authCommunGuard] },
+    {path : 'assignment/add', component: FormAssignmentComponent, canActivate: [authCommunGuard]},
+    {path : 'assignment/detail/:id', component : DetailAssignmentComponent, canActivate: [authCommunGuard]},
     //{ path: 'acceuil', component: AcceuilComponent}
 
     //Etudiant
