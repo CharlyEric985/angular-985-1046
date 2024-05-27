@@ -1,9 +1,6 @@
-.container {
-    /* height: 800px;  */
-    margin-left: 20%;
-    margin-top: 20px;
-    /* border: 1px solid rgba(0, 0, 0, 0.5); */
-  }
+.content {
+   margin-top: 3%;
+ }
 
   .image {
     height: 400x; /* Adjust the height as needed */

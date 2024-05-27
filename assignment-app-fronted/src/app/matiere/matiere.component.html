@@ -3,9 +3,10 @@
 
 <mat-sidenav-container autosize>
     <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <h1 class="titre">Liste Matiere</h1>
+        <div class="row content">
+            <div class="col-2"></div>
+            <div class="col-10">
+                <h1 class="titre">Liste Matieres</h1>
                 <div class="row">
                     <div class="col-4"><button type="button" routerLink="/matiere/ajout" class="btn btn-light">Ajouter</button></div>
                     <div class="col-4">
@@ -65,7 +66,7 @@
                                                 <mat-icon>visibility</mat-icon>
                                             </button>
                                         </div>
-                                        <div class="example-button-container">
+                                        <div class="example-button-container" *ngIf="isAdmin">
                                             <button mat-mini-fab color="warn" class="delete" matTooltip="Supression"
                                                 aria-label="Example icon button with a filter list icon">
                                                 <mat-icon>filter_list</mat-icon>

@@ -113,6 +113,7 @@ export class FormMatiereComponent implements OnInit{
 
   onSubmit() {
      try {
+      console.log('dededededede')
       if(this.form.valid) {
         this.isLoading = true;
         const matiere : Matiere = this.form.value;
@@ -136,12 +137,14 @@ export class FormMatiereComponent implements OnInit{
              }
             })
          }else {
+          this.isLoading = false
            throw new Error('Image obligatoire');
          }
         }
       }
      } catch (error : any) {
         this.messageError = error.message
+        this.isLoading = false
      }
   }
 

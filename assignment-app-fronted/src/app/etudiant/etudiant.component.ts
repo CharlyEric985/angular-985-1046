@@ -60,7 +60,7 @@ export class EtudiantComponent implements OnInit{
   fetchData (search: string,page: number) {
     this.isLoading = true;
     this.searchText = search ? search : "";
-      this.serviceEtudiant.getsEtudiants(this.searchText, page, 1).subscribe((etudiant: any) => {
+      this.serviceEtudiant.getsEtudiants(this.searchText, page, 10).subscribe((etudiant: any) => {
         this.data = etudiant.data.docs;
         this.totalPages = etudiant.data.totalPages;
         this.currentPage = page;

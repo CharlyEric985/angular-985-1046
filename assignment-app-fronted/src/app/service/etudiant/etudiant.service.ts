@@ -95,9 +95,12 @@ export class EtudiantService {
     return this.http.get<Etudiant>(`${this.uri}/${id}`, {headers}).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.status === 403) {
-
           this.authService.logout();
           // Rediriger vers la page d'accueil en cas d'erreur 403 (token invalide ou expiré)
+        }
+
+        if(error.status === 500) {
+          this.authService.logout();
         }
         // Propager l'erreur au composant consommateur
         throw error;

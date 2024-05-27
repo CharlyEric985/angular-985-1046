@@ -76,10 +76,17 @@ export class FormComponent implements OnInit{
   }
 
   fetchData(id: string) {
-     this.etudiantSerice.getEtudiant(id).subscribe((response: any) => {
-        this.form.patchValue(response.data);
-        this.imageUrl = this.authService.getPathChemin() + "/" + response.data.photo;
-     });
+    try {
+      this.etudiantSerice.getEtudiant(id).subscribe((response: any) => {
+        console.log("dedede", response)
+          this.form.patchValue(response.data);
+          this.imageUrl = this.authService.getPathChemin() + "/" + response.data.photo;
+       });
+    } catch (error) {
+      console.log("dedede", error)
+      throw error
+    }
+     
   }
 
   onSubmit () {

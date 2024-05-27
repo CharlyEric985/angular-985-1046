@@ -2,37 +2,33 @@
 <app-sidenav></app-sidenav>
 <mat-sidenav-container autosize>
     <div class="container">
-        <div class="detail" *ngIf="!isLoading; else spinner">
-            <div class="row">
-                <div class="col-5">
-                    <h1>Prof</h1>
-                    <div class="photo">
-                        <img [src]="imageUrl" class="rounded-circle" width="150px" height="150px" alt="...">
-                    </div>
-                </div>
-                <div class="col-5">
-                    <h1>Matiere</h1>
-                    <div class="photo">
-                        <img [src]="imageUrlM" class="" width="150px" height="150px" alt="...">
-                    </div>
-    
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-2"></div>
-                <div class="col-8">
+        <div class="row" style="margin-top: 2%;">
+            <div class="col-2"></div>
+            <div class="col-10">
+                <div class="detail" *ngIf="!isLoading; else spinner">
                     <div class="row">
-                          <span><h2>Titre du matière : {{ data.nom }}</h2></span>
-                          <span><h2>Proffesseur : {{ data.professeur }}</h2></span>
+                        <div class="col-6">
+                            <h1 class="text-center">Prof</h1>
+                            <img [src]="imageUrl" class="rounded-circle" width="150px" height="150px" alt="..." style="
+                            margin-left: 26%;">
+                        </div>
+                        <div class="col-6">
+                            <h1 class="text-center">Matiere</h1>
+                            <img [src]="imageUrlM" class="" width="150px" height="150px" alt="..." style="
+                            margin-left: 26%;">
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 7%;text-align: center;">
+                        <span><h2>Titre du matière : {{ data.nom }}</h2></span>
+                        <span><h2>Proffesseur : {{ data.professeur }}</h2></span>
                     </div>
                 </div>
-                <div class="col-2"></div>
+                <ng-template #spinner>
+                    <div class="spinner-container">
+                        <mat-spinner></mat-spinner>
+                    </div>
+                </ng-template>
             </div>
         </div>
-        <ng-template #spinner>
-            <div class="spinner-container">
-                <mat-spinner></mat-spinner>
-            </div>
-        </ng-template>
     </div>
 </mat-sidenav-container>

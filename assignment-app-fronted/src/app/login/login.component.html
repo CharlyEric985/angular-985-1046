@@ -1,16 +1,16 @@
 <mat-card class="large-card">
-  <img src="../../assets/img/logo/assignmentLogo.jpg" alt="Logo" class="assignment-logo">
+  <img src="../../assets/img/logo/assignmentLogo.jpg" height="200px" alt="Logo" class="assignment-logo">
   <mat-card-title>Login</mat-card-title>
   <mat-card-content>
     <form [formGroup]="form" (ngSubmit)="submit()">
       <p>
-        <mat-form-field class="large-input">
+        <mat-form-field class="large-input" appearance="outline">
           <input type="email" matInput placeholder="Email" formControlName="email">
         </mat-form-field>
       </p>
 
       <p>
-        <mat-form-field class="large-input">
+        <mat-form-field class="large-input" appearance="outline">
           <input type="password" matInput placeholder="Mot de passe" formControlName="mdp">
         </mat-form-field>
       </p>

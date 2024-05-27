@@ -2,19 +2,16 @@
 <app-sidenav></app-sidenav>
 <mat-sidenav-container autosize>
     <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="text-center ">
-                    <img [src]="imageUrl" class="rounded-circle" width="200px" height="200px" alt="...">
-                </div>
-            </div>
-        </div>
-        <div class="row detai-etudiant">
-            <div class="col-12">
-                <div class="text-center ">
-                    <span><h2>{{data.nom}} {{data.prenom}}</h2></span>
-                    <span><h2>Né(e) le  {{ data.dateNaissance | date: 'd MMMM y' : '':'fr' }}</h2></span>
-                </div>
+        <div class="row" style="margin-top: 5%;">
+            <div class="col-2"></div>
+            <div class="col-10">
+                    <img [src]="imageUrl" class="rounded-circle" width="200px" height="200px" alt="..." style="margin-left: 37%;">
+                    <div class="row" style="margin-top: 8%;">
+                        <div class="text-center ">
+                            <span><h2>{{data.nom}} {{data.prenom}}</h2></span>
+                            <span><h2>Né(e) le  {{ data.dateNaissance | date: 'd MMMM y' : '':'fr' }}</h2></span>
+                        </div>
+                    </div>
             </div>
         </div>
     </div>

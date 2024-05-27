@@ -34,7 +34,8 @@ export class MatiereComponent implements OnInit{
   path: any;
   isLoading: boolean = false;
   searchText : any;
-  searchQuery: string = ''; // Propriété pour stocker la valeur de recherche
+  searchQuery: string = ''; 
+  isAdmin : boolean = false;// Propriété pour stocker la valeur de recherche
   
   currentPage: number = 1;
   totalPages: number = 0;
@@ -49,12 +50,13 @@ export class MatiereComponent implements OnInit{
     console.log(this.searchQuery);
     this.fetchData(this.searchText,this.currentPage);
     this.getPath();
+    this.isAdmin = this.authService.getIsAdmin();
   }
 
   fetchData (search: string,page: number) {
     this.isLoading = true;
     this.searchText = search ? search : "";
-      this.serviceMatiere.getMatieres(this.searchText, page, 1).subscribe((matiere: any) => {
+      this.serviceMatiere.getMatieres(this.searchText, page, 10).subscribe((matiere: any) => {
         this.data = matiere.data.docs;
         this.totalPages = matiere.data.totalPages;
         this.currentPage = page;
