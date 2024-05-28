@@ -27,12 +27,14 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { response } from 'express';
+import { MatIcon } from '@angular/material/icon';
 
 
 @Component({
   selector: 'app-assignment',
   standalone: true,
-  imports: [CdkDropListGroup, CdkDropList, CdkDrag, SidenavComponent, NavbarComponent,MatSidenavModule,MatCardModule, MatDividerModule, MatButtonModule, MatProgressBarModule],
+  imports: [CdkDropListGroup, CdkDropList,MatIcon, CdkDrag, SidenavComponent, NavbarComponent,MatSidenavModule,MatCardModule, MatDividerModule, MatButtonModule, MatProgressBarModule],
   templateUrl: './assignment.component.html',
   styleUrl: './assignment.component.css'
 })
@@ -51,7 +53,7 @@ export class AssignmentComponent {
   //     this.done.push(...dataList.filter(item => item.etat === 1));
   //   });
   // });
-  const limit:number=10;
+  const limit:number=5;
   const page: number=1;
     this.assignmentService.getAssignmentsRendu(limit,page,true).subscribe((assignment: any) => {
       this.done = assignment.data.docs;
@@ -94,17 +96,22 @@ export class AssignmentComponent {
         console.log(datainstance)
         dialoginstance.afterClosed().subscribe((result: Assignment) => {
           console.log('The dialog was closed');
+          console.log(result);
           datainstance = result;
-          if(datainstance.note!==undefined){
-            transferArrayItem(
-              event.previousContainer.data,
-              event.container.data,
-              event.previousIndex,
-              event.currentIndex,
-            );
-            console.log(datainstance)
-          }
-           
+            if(datainstance.note!==undefined){
+              transferArrayItem(
+                event.previousContainer.data,
+                event.container.data,
+                event.previousIndex,
+                event.currentIndex,
+              );
+              console.log("ghghghghghghh", datainstance)
+              this.assignmentService.updateAssignment(datainstance).subscribe((response:any)=> {
+                console.log(response.data)
+              }
+
+              )
+            }
           }
         // console.log(datainstance)
       );

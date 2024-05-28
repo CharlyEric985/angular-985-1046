@@ -21,7 +21,7 @@ export class AssignmentsService {
     return this.http.get<Assignment[]>(this.uri);
   }
 
-  getAssignmentsRendu(limit: number, page: number, rendu: boolean) : Observable<any> {
+  getAssignmentsRendu(limit: number, page: number, rendu: boolean) : Observable<Assignment> {
     //console.log("this.authService.getToken", this.authService.getToken())
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.authService.getToken()}` // Use the token from AuthService
@@ -100,7 +100,8 @@ export class AssignmentsService {
    // il faudra faire une requête HTTP pour envoyer l'objet modifié
     // this.logService.log(assignment.nom, "modifié");
     //return of("Assignment modifié avec succès");
-    return this.http.put<Assignment>(this.uri, assignment);
+    console.log("szszsz0", assignment)
+    return this.http.put<Assignment>(this.uri, {assignment : assignment});
   }
   updateAssignments(assignment:any):Observable<any> {
     // l'assignment passé en paramètre est le même objet que dans le tableau

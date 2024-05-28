@@ -16,13 +16,14 @@
             <mat-card-title>{{item.titre}}</mat-card-title>
           </mat-card-header>
           <mat-card-content>
-            <p>This card has divider and indeterminate progress as footer</p>
-            <p></p>
+            <p>Auteur: {{item.auteurDetails.nom}}</p>
+            <p>prof: {{item.matiereDetails.professeur}}</p>
+            <p>date de rendue: {{item.dateDeRendu}}</p>
             <mat-divider></mat-divider>
           </mat-card-content>
           <mat-card-actions>
-            <button mat-button>LIKE</button>
-            <button mat-button>SHARE</button>
+            <button mat-button><mat-icon>visibility</mat-icon></button>
+            <button mat-button><mat-icon>edit</mat-icon></button>
           </mat-card-actions>
           <mat-card-footer>
             <mat-progress-bar mode="indeterminate"></mat-progress-bar>
@@ -46,13 +47,14 @@
             <mat-card-title>{{item.titre}}</mat-card-title>
           </mat-card-header>
           <mat-card-content>
-            <p>This card has divider and indeterminate progress as footer</p>
-            <p></p>
+            <p>Auteur: {{item.auteurDetails.nom}}</p>
+            <p>prof: {{item.matiereDetails.professeur}}</p>
+            <p>date de rendue: {{item.dateDeRendu}}</p>
             <mat-divider></mat-divider>
           </mat-card-content>
           <mat-card-actions>
-            <button mat-button>LIKE</button>
-            <button mat-button>SHARE</button>
+            <button mat-button><mat-icon>visibility</mat-icon></button>
+            <button mat-button><mat-icon>edit</mat-icon></button>
           </mat-card-actions>
           <mat-card-footer>
             <mat-progress-bar mode="indeterminate"></mat-progress-bar>

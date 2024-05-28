@@ -40,10 +40,10 @@ export class DialogElementsExampleDialogComponent {
   ) {}
 
   onNoClick(): void {
-    this.data.rendu==false
+    this.data.rendu=false
     console.log(this.data)
   }
   onYesClick(): void {
-    this.data.rendu==true
+    this.data.rendu=true
   }
 }
