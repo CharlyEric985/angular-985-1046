@@ -64,7 +64,7 @@ export class AssignmentsService {
   }
 
   // renvoie un assignment par son id, renvoie undefined si pas trouvé
-  getAssignment(id:number):Observable<Assignment|undefined> {
+  getAssignment(id:string):Observable<Assignment|undefined> {
     return this.http.get<Assignment>(this.uri + "/" + id)
     .pipe(
            catchError(this.handleError<any>('### catchError: getAssignments by id avec id=' + id))
@@ -87,11 +87,11 @@ export class AssignmentsService {
  };
 
   // ajoute un assignment et retourne une confirmation
-  addAssignment(assignment:Assignment):Observable<any> {
+  addAssignment(data : any):Observable<any> {
     //this.assignments.push(assignment);
     // this.logService.log(assignment.nom, "ajouté");
     //return of("Assignment ajouté avec succès");
-    return this.http.post<Assignment>(this.uri, assignment);
+    return this.http.post<Assignment>(this.uri, data);
   }
 
   updateAssignment(assignment:Assignment):Observable<any> {

@@ -12,13 +12,14 @@ import { DetailEtudiantComponent } from './etudiant/detail-etudiant/detail-etudi
 import { DetailComponent } from './matiere/detail/detail.component';
 import { FormAssignmentComponent } from './assignment/form-assignment/form-assignment.component';
 import { DetailAssignmentComponent } from './assignment/detail-assignment/detail-assignment.component';
+import { AddAssignmentComponent } from './assignment/add-assignment/add-assignment.component';
 
 
 export const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: 'home', component: LoginComponent},
     { path: 'acceuil', component: AssignmentComponent, canActivate: [authCommunGuard] },
-    {path : 'assignment/add', component: FormAssignmentComponent, canActivate: [authCommunGuard]},
+    {path : 'assignment/add', component: AddAssignmentComponent, canActivate: [authCommunGuard]},
     {path : 'assignment/detail/:id', component : DetailAssignmentComponent, canActivate: [authCommunGuard]},
     //{ path: 'acceuil', component: AcceuilComponent}
 
