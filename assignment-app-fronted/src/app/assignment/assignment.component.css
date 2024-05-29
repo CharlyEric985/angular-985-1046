@@ -92,3 +92,10 @@
     height: 100%;
     object-fit: cover;
 }
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 400px; /* Adjust height as needed to vertically center */
+}

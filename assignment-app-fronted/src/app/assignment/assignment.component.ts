@@ -30,12 +30,13 @@ import { MatButtonModule } from '@angular/material/button';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { AuthService } from '../service/auth.service';
 import { RouterLink } from '@angular/router'; 
-
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { NotifyServiceService } from '../service/notify-service.service';
 @Component({
   selector: 'app-assignment',
   standalone: true,
   imports: [CdkDropListGroup, CdkDropList, CdkDrag, SidenavComponent, NavbarComponent,MatSidenavModule,MatCardModule, 
-    MatDividerModule, MatButtonModule, MatProgressBarModule,CommonModule,RouterLink],
+    MatDividerModule, MatButtonModule, MatProgressBarModule,CommonModule,RouterLink,MatProgressSpinnerModule],
   templateUrl: './assignment.component.html',
   styleUrl: './assignment.component.css'
 })
@@ -44,7 +45,9 @@ export class AssignmentComponent {
   done:any;
   todo:any;
   path: string = '';
-  constructor(public dialog: MatDialog,private assignmentService:AssignmentsService,private route:ActivatedRoute,private router:Router, private authService: AuthService) {
+  isLoading = false;
+  constructor(public dialog: MatDialog,private assignmentService:AssignmentsService,private route:ActivatedRoute,
+    private router:Router, private authService: AuthService, private notifyService : NotifyServiceService) {
     this.path = this.authService.getPathChemin();
    }
   ngOnInit() {
@@ -57,6 +60,7 @@ export class AssignmentComponent {
   //     this.done.push(...dataList.filter(item => item.etat === 1));
   //   });
   // });
+  this.isLoading = true;
   const limit:number=5;
   const page: number=1;
     this.assignmentService.getAssignmentsRendu(limit,page,true).subscribe((assignment: any) => {
@@ -74,6 +78,7 @@ export class AssignmentComponent {
       // this.generatePageNumbers();
       // this.isLoading = false;
     });
+    this.isLoading = false;
 
   }
   drop(event: CdkDragDrop<Assignment[]>) {
@@ -98,10 +103,7 @@ export class AssignmentComponent {
           disableClose: true,  // Empêche la fermeture en cliquant en dehors ou avec la touche Escape
           hasBackdrop: true    // Affiche le fond noir
         });
-        console.log(datainstance)
         dialoginstance.afterClosed().subscribe((result: Assignment) => {
-          console.log('The dialog was closed');
-          console.log(result);
           datainstance = result;
             if(datainstance.note!==undefined){
               transferArrayItem(
@@ -110,9 +112,10 @@ export class AssignmentComponent {
                 event.previousIndex,
                 event.currentIndex,
               );
-              console.log("ghghghghghghh", datainstance)
               this.assignmentService.updateAssignment(datainstance).subscribe((response:any)=> {
-                console.log(response.data)
+                if(response.statue == 'ok'){
+                  this.notifyService.success(response.message);
+                }
               }
 
               )

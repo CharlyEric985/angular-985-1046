@@ -42,7 +42,8 @@ export class FormMatiereComponent implements OnInit{
   matiereId: string | null = null;
   profs: Prof[] = [
     {value: 'Richard Grin', viewValue: 'Richard Grin'},
-    {value: 'Michel', viewValue: 'Michel Buffal'},
+    {value: 'Michel Buffal', viewValue: 'Michel Buffal'},
+    {value: 'Gregory Galli', viewValue: 'Gregory Galli'},
   ];
 
   constructor(private fb: FormBuilder,private matiereService : MatiereService,private notifyService : NotifyServiceService,
@@ -113,7 +114,6 @@ export class FormMatiereComponent implements OnInit{
 
   onSubmit() {
      try {
-      console.log('dededededede')
       if(this.form.valid) {
         this.isLoading = true;
         const matiere : Matiere = this.form.value;

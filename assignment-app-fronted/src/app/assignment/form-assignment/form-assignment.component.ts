@@ -51,7 +51,7 @@ constructor(private assigmentService: AssignmentsService,private route: Activate
     this.route.paramMap.subscribe((params:any) => {
       this.assigmentId = params.get('id');
       if (this.assigmentId) {
-        this.fetchData(this.studentId);
+        //this.fetchData(this.studentId);
       }
     });
      this.matiereService.getMatieres("", 1, 100).subscribe((response:any) => {

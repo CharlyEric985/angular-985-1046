@@ -21,7 +21,7 @@ export class AssignmentsService {
     return this.http.get<Assignment[]>(this.uri);
   }
 
-  getAssignmentsRendu(limit: number, page: number, rendu: boolean) : Observable<Assignment> {
+  getAssignmentsRendu(limit: number, page: number, rendu: boolean) : Observable<any> {
     //console.log("this.authService.getToken", this.authService.getToken())
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.authService.getToken()}` // Use the token from AuthService
