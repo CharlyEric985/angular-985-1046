@@ -32,7 +32,9 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrl: './dialog-elements-example-dialog.component.css'
 })
 export class DialogElementsExampleDialogComponent {
-  emailFormControl = new FormControl('', [Validators.required]);
+  emailFormControl = new FormControl('', [Validators.required,Validators.min(0),
+  Validators.max(20)]
+);
   matcher = new MyErrorStateMatcher();
   constructor(
     public dialogRef: MatDialogRef<DialogElementsExampleDialogComponent>,

@@ -11,6 +11,8 @@ import {MatSelectModule} from '@angular/material/select';
 import { MatiereService } from '../../service/matiere/matiere.service';
 import { EtudiantService } from '../../service/etudiant/etudiant.service';
 import { response } from 'express';
+import { ActivatedRoute } from '@angular/router';
+import { AssignmentsService } from '../../assignment.service';
 
 @Component({
   selector: 'app-form-assignment',
@@ -24,15 +26,34 @@ import { response } from 'express';
 export class FormAssignmentComponent implements OnInit {
  listMatiere : any;
  listeEtudiant : any;
-constructor(private matiereService : MatiereService, private etudiantService : EtudiantService){
+ assigmentId:any;
+constructor(private assigmentService: AssignmentsService,private route: ActivatedRoute,private matiereService : MatiereService, private etudiantService : EtudiantService){
 
 }
 
   ngOnInit(): void {
       this.fetchData()
   }
-
+  fetchAssigment(id: string) {
+    try {
+      this.assigmentService.getAssignment(id).subscribe((response: any) => {
+        console.log("dedede", response)
+          // this.form.patchValue(response.data);
+          // this.imageUrl = this.authService.getPathChemin() + "/" + response.data.photo;
+       });
+    } catch (error) {
+      console.log("dedede", error)
+      throw error
+    }
+     
+  }
   fetchData() {
+    this.route.paramMap.subscribe((params:any) => {
+      this.assigmentId = params.get('id');
+      if (this.assigmentId) {
+        this.fetchData(this.studentId);
+      }
+    });
      this.matiereService.getMatieres("", 1, 100).subscribe((response:any) => {
         this.listMatiere = response.data.docs
      })

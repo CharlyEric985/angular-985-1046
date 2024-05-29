@@ -18,7 +18,7 @@ export const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: 'home', component: LoginComponent},
     { path: 'acceuil', component: AssignmentComponent, canActivate: [authCommunGuard] },
-    {path : 'assignment/add', component: FormAssignmentComponent, canActivate: [authCommunGuard]},
+    {path : 'assignment/edit/:id', component: FormAssignmentComponent, canActivate: [authCommunGuard]},
     {path : 'assignment/detail/:id', component : DetailAssignmentComponent, canActivate: [authCommunGuard]},
     //{ path: 'acceuil', component: AcceuilComponent}
 
