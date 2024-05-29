@@ -3,6 +3,7 @@ import { AssignmentsService } from '../assignment.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Assignment } from './assignment.model';
 import { NavbarComponent } from '../shared/navbar/navbar.component';
+import { CommonModule } from '@angular/common';
 import {
   MatDialog,
   MAT_DIALOG_DATA,
@@ -27,14 +28,14 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
-import { response } from 'express';
-import { MatIcon } from '@angular/material/icon';
-
+import { AuthService } from '../service/auth.service';
+import { RouterLink } from '@angular/router'; 
 
 @Component({
   selector: 'app-assignment',
   standalone: true,
-  imports: [CdkDropListGroup, CdkDropList,MatIcon, CdkDrag, SidenavComponent, NavbarComponent,MatSidenavModule,MatCardModule, MatDividerModule, MatButtonModule, MatProgressBarModule],
+  imports: [CdkDropListGroup, CdkDropList, CdkDrag, SidenavComponent, NavbarComponent,MatSidenavModule,MatCardModule, 
+    MatDividerModule, MatButtonModule, MatProgressBarModule,CommonModule,RouterLink],
   templateUrl: './assignment.component.html',
   styleUrl: './assignment.component.css'
 })
@@ -42,7 +43,10 @@ export class AssignmentComponent {
   @Input() id: any;
   done:any;
   todo:any;
-  constructor(public dialog: MatDialog,private assignmentService:AssignmentsService,private route:ActivatedRoute,private router:Router) { }
+  path: string = '';
+  constructor(public dialog: MatDialog,private assignmentService:AssignmentsService,private route:ActivatedRoute,private router:Router, private authService: AuthService) {
+    this.path = this.authService.getPathChemin();
+   }
   ngOnInit() {
   //   this.assignmentService.getAssignment(this.id)
   // .subscribe((assignment: any) => {
@@ -64,12 +68,13 @@ export class AssignmentComponent {
     });
     this.assignmentService.getAssignmentsRendu(limit,page,false).subscribe((assignment: any) => {
       this.todo = assignment.data.docs;
+      console.log(this.todo)
       // this.totalPages = matiere.data.totalPages;
       // this.currentPage = page;
       // this.generatePageNumbers();
       // this.isLoading = false;
     });
-    
+
   }
   drop(event: CdkDragDrop<Assignment[]>) {
 
