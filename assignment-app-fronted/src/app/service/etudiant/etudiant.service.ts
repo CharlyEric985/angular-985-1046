@@ -14,7 +14,8 @@ export class EtudiantService {
 
   constructor(private http:HttpClient,  private authService: AuthService, private router: Router) { }
 
-  uri = "http://localhost:3500/api/auteur";
+  //uri = "http://localhost:3500/api/auteur";
+  uri = "https://backend-projet-m2.onrender.com/api/auteur";
 
   getsEtudiants(search: string,page: number, limit: number):Observable<any> {
 
