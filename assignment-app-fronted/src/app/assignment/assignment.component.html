@@ -16,6 +16,14 @@
                   <mat-icon>keyboard_arrow_left</mat-icon>
                 </button>
               </div>
+              <div class="pagination">
+                <button type="button" class="btn btn-primary pagination-item" 
+                    *ngFor="let pageNumber of pageNumbersT"
+                    [class.active]="pageNumber === currentpageT" 
+                    (click)="goToPageT(pageNumber)">
+              {{pageNumber}}
+            </button>
+              </div>
               <div>
                 <button mat-mini-fab color="link"  [disabled]="disablenextT" (click)="nexttodo()" aria-label="Example icon button with a filter list icon">
                   <mat-icon>keyboard_arrow_right</mat-icon>
@@ -65,6 +73,15 @@
                 <button mat-mini-fab color="link" (click)="prevrendue()" [disabled]="disableprevR" aria-label="Example icon button with a filter list icon">
                   <mat-icon>keyboard_arrow_left</mat-icon>
                 </button>
+                <div class="pagination">
+                  <button type="button" class="btn btn-primary pagination-item" 
+                      *ngFor="let pageNumber of pageNumbersR"
+                      [class.active]="pageNumber === currentpageR" 
+                      (click)="goToPageR(pageNumber)">
+                {{pageNumber}}
+              </button>
+                </div>
+              
               </div>
               <div>
                 <button mat-mini-fab color="link" (click)="nextrendue()" [disabled]="disablenextR" aria-label="Example icon button with a filter list icon">

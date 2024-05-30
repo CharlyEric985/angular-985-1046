@@ -57,12 +57,15 @@ export class AssignmentComponent {
   disableprevR:any=false;
   disablenextT:any=false;
   disableprevT:any=false;
+  pageNumbersR:any=[];
+  pageNumbersT:any=[];
 
   isLoading = false;
   constructor(public dialog: MatDialog,private assignmentService:AssignmentsService,private route:ActivatedRoute,
     private router:Router, private authService: AuthService, private notifyService : NotifyServiceService) {
     this.path = this.authService.getPathChemin();
    }
+   
   ngOnInit() {
   //   this.assignmentService.getAssignment(this.id)
   // .subscribe((assignment: any) => {
@@ -81,6 +84,16 @@ export class AssignmentComponent {
     this.isLoading = false;
 
   }
+  goToPageT(page: number) {
+    if (page !== this.currentpageT) {
+      this.fetchAlldata(page,false);
+    }
+  }
+  goToPageR(page: number) {
+    if (page !== this.currentpageR) {
+      this.fetchAlldata(page,true);
+    }
+  }
   fetchAlldata(page:any,type:boolean)
   {
     this.assignmentService.getAssignmentsRendu(3,page,type).subscribe((assignment: any) => {
@@ -91,8 +104,16 @@ export class AssignmentComponent {
         this.done = assignment.data.docs;
         this.currentpageR = page;
         this.totalpageR=assignment.data.totalPages
+        this.pageNumbersR=[]
+
+        for(let i=1;i <=this.totalpageR; i++)
+        {
+          console.log(i)
+          this.pageNumbersR.push(i)
+        }
         if(this.currentpageR==this.totalpageR)
         {
+          console.log(this.currentpageR==this.totalpageR)
           this.disablenextR=true
           this.disableprevR=false
         }
@@ -102,14 +123,18 @@ export class AssignmentComponent {
           this.disablenextR=false
         }
         else{
-          this.disableprevT=false
-          this.disablenextT=false
+          this.disableprevR=false
+          this.disablenextR=false
         }
         
       }else{
         this.todo = assignment.data.docs;
         this.currentpageT = page;
         this.totalpageT=assignment.data.totalPages
+        for(let i=1;i <=this.totalpageT; i++)
+          {
+            this.pageNumbersT.push(i)
+          }
         if(this.currentpageT==this.totalpageT)
           {
             this.disablenextT=true

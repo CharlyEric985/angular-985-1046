@@ -9,6 +9,18 @@
   display: flex;
   place-content: space-evenly;
 }
+.pagination {
+  display: inline-flex;
+  white-space: nowrap; /* Empêche le saut de ligne */
+  overflow-x: auto; /* Cache le débordement horizontal */
+  text-overflow: ellipsis; /* Affiche les points de suspension si le contenu est trop long */
+}
+
+.pagination-item {
+  display: inline-block; /* Affiche les éléments en ligne */
+  padding: 0 5px; /* Ajoute un peu d'espace entre les éléments */
+}
+
 .example-list {
   border: solid 1px #ccc;
   min-height: 60px;
