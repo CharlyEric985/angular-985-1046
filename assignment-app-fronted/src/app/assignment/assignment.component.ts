@@ -32,11 +32,15 @@ import { AuthService } from '../service/auth.service';
 import { RouterLink } from '@angular/router'; 
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { NotifyServiceService } from '../service/notify-service.service';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { MatIcon } from '@angular/material/icon';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { FormControl } from '@angular/forms';
 @Component({
   selector: 'app-assignment',
   standalone: true,
-  imports: [CdkDropListGroup, CdkDropList, CdkDrag, SidenavComponent, NavbarComponent,MatSidenavModule,MatCardModule, 
-    MatDividerModule, MatButtonModule, MatProgressBarModule,CommonModule,RouterLink,MatProgressSpinnerModule],
+  imports: [CdkDropListGroup,MatIcon,MatFormField,MatLabel, CdkDropList, CdkDrag, SidenavComponent, NavbarComponent,MatSidenavModule,MatCardModule, 
+    MatDividerModule,MatAutocompleteModule, MatButtonModule, MatProgressBarModule,CommonModule,RouterLink,MatProgressSpinnerModule],
   templateUrl: './assignment.component.html',
   styleUrl: './assignment.component.css'
 })
@@ -45,6 +49,15 @@ export class AssignmentComponent {
   done:any;
   todo:any;
   path: string = '';
+  currentpageR:any;
+  currentpageT:any;
+  totalpageR:any;
+  totalpageT:any;
+  disablenextR:any=false;
+  disableprevR:any=false;
+  disablenextT:any=false;
+  disableprevT:any=false;
+
   isLoading = false;
   constructor(public dialog: MatDialog,private assignmentService:AssignmentsService,private route:ActivatedRoute,
     private router:Router, private authService: AuthService, private notifyService : NotifyServiceService) {
@@ -61,25 +74,85 @@ export class AssignmentComponent {
   //   });
   // });
   this.isLoading = true;
-  const limit:number=5;
   const page: number=1;
-    this.assignmentService.getAssignmentsRendu(limit,page,true).subscribe((assignment: any) => {
-      this.done = assignment.data.docs;
-      // this.totalPages = matiere.data.totalPages;
-      // this.currentPage = page;
-      // this.generatePageNumbers();
-      // this.isLoading = false;
-    });
-    this.assignmentService.getAssignmentsRendu(limit,page,false).subscribe((assignment: any) => {
-      this.todo = assignment.data.docs;
-      console.log(this.todo)
-      // this.totalPages = matiere.data.totalPages;
-      // this.currentPage = page;
-      // this.generatePageNumbers();
-      // this.isLoading = false;
-    });
+  
+    this.fetchAlldata(page,true)
+    this.fetchAlldata(page,false)
     this.isLoading = false;
 
+  }
+  fetchAlldata(page:any,type:boolean)
+  {
+    this.assignmentService.getAssignmentsRendu(3,page,type).subscribe((assignment: any) => {
+      console.log(assignment)
+      if(type==true)
+      {
+        
+        this.done = assignment.data.docs;
+        this.currentpageR = page;
+        this.totalpageR=assignment.data.totalPages
+        if(this.currentpageR==this.totalpageR)
+        {
+          this.disablenextR=true
+          this.disableprevR=false
+        }
+       if(this.currentpageR==1)
+        {
+          this.disableprevR=true
+          this.disablenextR=false
+        }
+        else{
+          this.disableprevT=false
+          this.disablenextT=false
+        }
+        
+      }else{
+        this.todo = assignment.data.docs;
+        this.currentpageT = page;
+        this.totalpageT=assignment.data.totalPages
+        if(this.currentpageT==this.totalpageT)
+          {
+            this.disablenextT=true
+            this.disableprevT=false
+          }
+         if(this.currentpageT==1)
+          {
+            this.disableprevT=true
+            this.disablenextT=false
+          }
+          else{
+            this.disableprevT=false
+            this.disablenextT=false
+          }
+          
+
+      }
+      this.isLoading=false;
+      // this.totalPages = matiere.data.totalPages;
+      // this.currentPage = page;
+      // this.generatePageNumbers();
+      // this.isLoading = false;
+    });
+  }
+  prevrendue(){
+    this.currentpageR--;
+    console.log("this.currentpageR")
+    this.fetchAlldata(this.currentpageR,true)
+  }
+  nextrendue(){
+    this.currentpageR++
+    // console.log(this.currentpageR)
+    this.fetchAlldata(this.currentpageR,true)
+  }
+  prevtodo(){
+    this.currentpageT--;
+    console.log("this.currentpageR")
+    this.fetchAlldata(this.currentpageT,false)
+  }
+  nexttodo(){
+    this.currentpageT++
+    // console.log(this.currentpageR)
+    this.fetchAlldata(this.currentpageT,false)
   }
   drop(event: CdkDragDrop<Assignment[]>) {
 
