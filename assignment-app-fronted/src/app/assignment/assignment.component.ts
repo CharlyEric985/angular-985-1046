@@ -59,7 +59,8 @@ export class AssignmentComponent {
   disableprevT:any=false;
   pageNumbersR:any=[];
   pageNumbersT:any=[];
-
+  isPagineT:any=false;
+  isPagineR:any=false;
   isLoading = false;
   constructor(public dialog: MatDialog,private assignmentService:AssignmentsService,private route:ActivatedRoute,
     private router:Router, private authService: AuthService, private notifyService : NotifyServiceService) {
@@ -96,10 +97,12 @@ export class AssignmentComponent {
   }
   fetchAlldata(page:any,type:boolean)
   {
+    
     this.assignmentService.getAssignmentsRendu(3,page,type).subscribe((assignment: any) => {
       console.log(assignment)
       if(type==true)
       {
+        this.isPagineR=true
         
         this.done = assignment.data.docs;
         this.currentpageR = page;
@@ -126,8 +129,12 @@ export class AssignmentComponent {
           this.disableprevR=false
           this.disablenextR=false
         }
+        setTimeout(() => {
+          this.isPagineR=false
+        }, 500);
         
       }else{
+        this.isPagineT=true
         this.todo = assignment.data.docs;
         this.currentpageT = page;
         this.totalpageT=assignment.data.totalPages
@@ -149,10 +156,11 @@ export class AssignmentComponent {
             this.disableprevT=false
             this.disablenextT=false
           }
-          
-
+          setTimeout(() => {
+            this.isPagineT=false
+          }, 500);  
       }
-      this.isLoading=false;
+      
       // this.totalPages = matiere.data.totalPages;
       // this.currentPage = page;
       // this.generatePageNumbers();
