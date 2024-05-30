@@ -17,6 +17,8 @@
 }
 
 .pagination-item {
+  background-color: #126f7e;
+  color: white;
   display: inline-block; /* Affiche les éléments en ligne */
   padding: 0 5px; /* Ajoute un peu d'espace entre les éléments */
 }
