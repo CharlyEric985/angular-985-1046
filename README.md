@@ -34,3 +34,5 @@ Pour le front-end, les tâches ont été réparties comme suit :
   - Snack bar service
   - Side nav
   - Protection des urls
+
+- Pour faire tourner ca sur votre machine installer le node module de chaque application node( avec la commande npm i) puis demarrez l'api avec la commande(npm start) puis le front avec la commande (ngserve)
