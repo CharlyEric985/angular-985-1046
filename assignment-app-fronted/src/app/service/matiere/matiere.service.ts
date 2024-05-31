@@ -13,8 +13,8 @@ export class MatiereService {
 
   constructor(private http:HttpClient,  private authService: AuthService, private router: Router) { }
 
-  uri = "http://localhost:3500/api/matiere";
-
+  //uri = "http://localhost:3500/api/matiere";
+  uri = "https://backend-projet-m2.onrender.com/api/matiere";
 
   getMatieres (search: string,page: number, limit: number):Observable<any> {
 
