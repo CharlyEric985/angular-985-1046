@@ -3,10 +3,17 @@
 ## Back-end
 Pour le back-end, les tâches ont été réparties comme suit :
 - Ndriamanarina Eric Charly : 
-  - [Insérer les tâches ici]
+  - Création de la fonction de connexion (login) dans le service d'authentification (api/login).
+  -  Création de la fonction generateAccessToken pour générer un jeton d'accès à chaque connexion.
+  -  Création du modèle "assignment" (api/assignment) avec les opérations CRUD correspondantes dans le service et le contrôleur.
+  -  Mise en place des routes avec la protection du jeton.
 
 - Razafindramasy Theo Guillaume :
-  - [Insérer les tâches ici]
+  - Création du modèle "matiere" (api/matiere) avec les opérations CRUD correspondantes dans le service et le contrôleur.
+  - Création du modèle "auteur" (api/auteur) avec les opérations CRUD correspondantes dans le service et le contrôleur.
+  -  Mise en place des routes avec la protection du jeton.
+  -  Création de la middleware authenticateToken pour vérifier le jeton d'authentification.
+  -  Création de la middleware upload pour gérer les téléchargements d'images
 
 ## Front-end
 Pour le front-end, les tâches ont été réparties comme suit :
