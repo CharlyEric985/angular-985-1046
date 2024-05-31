@@ -68,15 +68,7 @@ export class AssignmentComponent {
    }
    
   ngOnInit() {
-  //   this.assignmentService.getAssignment(this.id)
-  // .subscribe((assignment: any) => {
-  //   const datas = assignment.data;
-  //   datas.forEach((dataList: any[]) => {
-  //     // Séparer les données en deux groupes en fonction de `etat` par chatGpt
-  //     this.done.push(...dataList.filter(item => item.etat === 0));
-  //     this.done.push(...dataList.filter(item => item.etat === 1));
-  //   });
-  // });
+ 
   this.isLoading = true;
   const page: number=1;
   
@@ -86,6 +78,7 @@ export class AssignmentComponent {
 
   }
   goToPageT(page: number) {
+    //si la page selectioner est pas la page actuelle
     if (page !== this.currentpageT) {
       this.fetchAlldata(page,false);
     }
@@ -95,6 +88,8 @@ export class AssignmentComponent {
       this.fetchAlldata(page,true);
     }
   }
+  //avoir tout les assignment true pour les rendu false pour les a faire
+  //tout les code pour fetchAlldata sont propres au groupe non ce n'est pas du plagiat
   fetchAlldata(page:any,type:boolean)
   {
     
@@ -167,31 +162,35 @@ export class AssignmentComponent {
       // this.isLoading = false;
     });
   }
+  //pagination du boutton prev
   prevrendue(){
     this.currentpageR--;
     console.log("this.currentpageR")
     this.fetchAlldata(this.currentpageR,true)
   }
+  //pagination du boutton next
   nextrendue(){
     this.currentpageR++
     // console.log(this.currentpageR)
     this.fetchAlldata(this.currentpageR,true)
   }
+  //la meme chose pour les non rendue
   prevtodo(){
     this.currentpageT--;
     console.log("this.currentpageR")
     this.fetchAlldata(this.currentpageT,false)
   }
+  //encor la meme chose pour les non rendue
   nexttodo(){
     this.currentpageT++
     // console.log(this.currentpageR)
     this.fetchAlldata(this.currentpageT,false)
   }
+  //evenement de drop
   drop(event: CdkDragDrop<Assignment[]>) {
 
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-      // datainstance.rendu=false
       
     } else {
       console.log(event.currentIndex)
@@ -199,9 +198,6 @@ export class AssignmentComponent {
       console.log(event.container.data)
       console.log(datainstance.rendu)
       console.log(datainstance)
-
-      // console.log(this.dialog)
-      // event.container.data[event.currentIndex].rendue=true
       if(datainstance.rendu===false)
       {
         const dialoginstance=this.dialog.open(DialogElementsExampleDialogComponent,{
@@ -209,6 +205,7 @@ export class AssignmentComponent {
           disableClose: true,  // Empêche la fermeture en cliquant en dehors ou avec la touche Escape
           hasBackdrop: true    // Affiche le fond noir
         });
+        //chatgpt m'as aider la dessus et j'ai aussi pris un peu de code dans cdk angular material
         dialoginstance.afterClosed().subscribe((result: Assignment) => {
           datainstance = result;
             if(datainstance.note!==undefined){
@@ -227,11 +224,8 @@ export class AssignmentComponent {
               )
             }
           }
-        // console.log(datainstance)
       );
       }
-      // console.log(datainstance)
-
 
     }
   }

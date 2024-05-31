@@ -54,7 +54,7 @@ export class AddAssignmentComponent implements OnInit {
   ngOnInit(): void {
       this.fetchData()
   }
-
+  //loader les data de matiere et etudiant
   fetchData() {
     this.matiereService.getMatieres("", 1, 100).subscribe((response:any) => {
        this.listMatiere = response.data.docs
@@ -63,7 +63,7 @@ export class AddAssignmentComponent implements OnInit {
       this.listeEtudiant = response.data.docs
     })
  }
-
+//la fonction ajout
   addAssignment() {
     try {
     this.isLoading = true;

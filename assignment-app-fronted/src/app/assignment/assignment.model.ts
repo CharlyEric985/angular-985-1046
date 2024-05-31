@@ -1,3 +1,4 @@
+//inspirer de la classe dans le tp
 export class Assignment {
   _id?: string;
   titre!: string;
